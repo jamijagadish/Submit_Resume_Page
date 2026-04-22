@@ -3,11 +3,7 @@ import RecruitmentPage from './component/RecruitmentPage'
 
 // App project ka top-level component hai, jo abhi recruitment page show kar raha hai.
 const App = () => {
-  return (
-    <div>
-      <RecruitmentPage />
-    </div>
-  )
+  return <RecruitmentPage />
 }
 
 export default App

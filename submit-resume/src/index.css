@@ -1,388 +1,99 @@
-:root {
-  /* Theme colors aur reusable design values yahan centralize kiye gaye hain. */
-  --bg: #f8fafc;
-  --bg-section: #f1f5f9;
-  --bg-panel: #ffffff;
-  --bg-card: #ffffff;
-  --text: #0f172a;
-  --body-text: #475569;
-  --secondary-text: #64748b;
-  --muted: #94a3b8;
-  --border: #dbeafe;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-strong: #0f2b5b;
-  --accent-soft: #3b82f6;
-  --badge-bg: #dbeafe;
-  --panel-text: #0f172a;
-  --panel-muted: #64748b;
-  --shadow: 0 24px 60px rgba(37, 99, 235, 0.12);
-}
+@import "tailwindcss";
 
-* {
-  /* Har element ka width/height calculation predictable rahe. */
-  box-sizing: border-box;
-}
+@theme {
+  --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --animate-fade-up: fade-up 0.7s ease-out forwards;
+  --animate-fade-right: fade-right 0.8s ease-out forwards;
+  --animate-fade-left: fade-left 0.85s ease-out forwards;
+  --animate-glow-float: glow-float 9s ease-in-out infinite;
+  --animate-badge-pulse: badge-pulse 3.2s ease-in-out infinite;
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* Background me layered gradients page ko soft visual depth dete hain. */
-  background:
-    radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 32%),
-    radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08), transparent 30%),
-    var(--bg);
-  color: var(--text);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-.page-shell {
-  position: relative;
-  overflow: hidden;
-}
-
-.ambient-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.container {
-  /* Common wrapper: content ko center karta hai aur max width limit set karta hai. */
-  width: min(1120px, calc(100% - 48px));
-  margin: 0 auto;
-}
-
-.site-header {
-  position: relative;
-  border-bottom: 1px solid rgba(219, 234, 254, 0.7);
-  background: var(--accent-strong);
-  backdrop-filter: blur(18px);
-}
-
-.header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 20px 0;
-}
-
-.eyebrow {
-  margin: 0 0 6px;
-  color: #dbeafe;
-  font-size: 0.875rem;
-  letter-spacing: 0.3em;
-}
-
-h1,
-h2,
-h3,
-p {
-  margin: 0;
-}
-
-h1 {
-  font-size: clamp(1.9rem, 2.5vw, 2.4rem);
-  color: #ffffff;
-}
-
-.primary-button,
-.submit-button {
-  border: 0;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.primary-button {
-  padding: 14px 22px;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  font-weight: 700;
-  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.28);
-}
-
-.primary-button:hover,
-.submit-button:hover {
-  transform: translateY(-1px);
-}
-
-.primary-button:hover {
-  background: var(--accent-hover);
-}
-
-.hero-grid {
-  /* Main layout: left content aur right form ko 2-column grid me rakhta hai. */
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 40px;
-  align-items: start;
-  padding: 48px 0;
-}
-
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding-top: 24px;
-}
-
-.badge {
-  align-self: flex-start;
-  padding: 10px 18px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--badge-bg);
-  color: var(--accent);
-  font-size: 0.95rem;
-}
-
-.hero-copy h2 {
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  line-height: 0.96;
-  letter-spacing: -0.04em;
-}
-
-.lead {
-  max-width: 640px;
-  color: var(--body-text);
-  font-size: 1.125rem;
-  line-height: 1.7;
-}
-
-.stats-grid,
-.metrics-grid,
-.perks-grid {
-  display: grid;
-  gap: 16px;
-}
-
-.stats-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.metrics-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.stat-card,
-.metric-card,
-.perk-card {
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: var(--bg-card);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-}
-
-.stat-card {
-  padding: 22px;
-}
-
-.metric-card {
-  padding: 18px;
-}
-
-.metric-value {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--accent-strong);
-}
-
-.metric-label,
-.perk-card p {
-  color: var(--secondary-text);
-}
-
-.form-panel {
-  border: 1px solid var(--border);
-  border-radius: 32px;
-  padding: 32px;
-  background: var(--bg-panel);
-  color: var(--panel-text);
-  box-shadow: var(--shadow);
-}
-
-.form-copy {
-  margin-bottom: 24px;
-}
-
-.form-copy h3 {
-  font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.form-copy p {
-  color: var(--panel-muted);
-}
-
-.application-form {
-  /* Form fields vertical stack me equal gap ke saath align hote hain. */
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.two-column {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.application-form input,
-.application-form select,
-.application-form textarea {
-  width: 100%;
-  border: 1px solid #cbd5e1;
-  border-radius: 16px;
-  padding: 14px 16px;
-  background: #fff;
-  color: var(--text);
-  outline: none;
-}
-
-.application-form input:focus,
-.application-form select:focus,
-.application-form textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
-}
-
-.application-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.upload-box {
-  display: block;
-  border: 2px dashed #bfdbfe;
-  border-radius: 24px;
-  padding: 28px 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.upload-box:hover {
-  border-color: var(--accent);
-  background: #eff6ff;
-}
-
-.upload-box input {
-  display: none;
-}
-
-.upload-title {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.upload-subtitle {
-  color: var(--panel-muted);
-  font-size: 0.95rem;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: var(--body-text);
-  font-size: 0.95rem;
-}
-
-.checkbox-row input {
-  width: auto;
-  margin-top: 4px;
-}
-
-.submit-button {
-  padding: 16px;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  color: #fff;
-  font-weight: 700;
-}
-
-.perks-section {
-  position: relative;
-  padding-bottom: 56px;
-}
-
-.perks-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.perk-card {
-  padding: 28px;
-}
-
-.perk-card h4 {
-  margin: 0 0 10px;
-  font-size: 1.3rem;
-  color: var(--text);
-}
-
-.hero-copy h2,
-.stat-card {
-  color: var(--text);
-}
-
-.hero-copy,
-.perks-section {
-  position: relative;
-}
-
-.perks-section::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 24px;
-  background: var(--bg-section);
-  border-radius: 32px;
-  z-index: -1;
-}
-
-@media (max-width: 900px) {
-  /* Smaller screens par grid sections single column me convert ho jate hain. */
-  .hero-grid,
-  .perks-grid,
-  .metrics-grid {
-    grid-template-columns: 1fr;
+  @keyframes glow-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translate3d(0, 18px, 0) scale(1.08);
+      opacity: 0.9;
+    }
   }
 
-  .hero-copy h2 {
-    line-height: 1.02;
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-right {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-left {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes badge-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.12);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+    }
   }
 }
 
-@media (max-width: 640px) {
-  .container {
-    width: min(1120px, calc(100% - 28px));
+@layer base {
+  * {
+    box-sizing: border-box;
   }
 
-  .header-row,
-  .two-column,
-  .stats-grid {
-    grid-template-columns: 1fr;
-    display: grid;
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 32%),
+      radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08), transparent 30%),
+      #f8fafc;
+    color: #0f172a;
+    font-family: var(--font-sans);
   }
 
-  .header-row {
-    justify-content: stretch;
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
   }
+}
 
-  .primary-button {
-    width: 100%;
-  }
-
-  .form-panel {
-    padding: 24px;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }
