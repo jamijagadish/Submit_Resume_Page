@@ -93,7 +93,7 @@ export default function RecruitmentPage() {
     const trimmedProfession = formData.profession.trim();
     const trimmedWhyJoin = formData.whyJoin.trim();
     const trimmedCustomRole = formData.customRole.trim();
-    const normalizedPhone = trimmedPhone.replace(/[^\d+]/g, "");
+    const normalizedPhone = trimmedPhone.replace(/\D/g, "");
 
     if (!trimmedFullName) {
       nextErrors.fullName = "Full name is required.";
@@ -109,8 +109,8 @@ export default function RecruitmentPage() {
 
     if (!trimmedPhone) {
       nextErrors.phone = "Phone number is required.";
-    } else if (!/^\+?\d{8,15}$/.test(normalizedPhone)) {
-      nextErrors.phone = "Enter a valid phone number with 8 to 15 digits.";
+    } else if (!/^\d{10}$/.test(normalizedPhone)) {
+      nextErrors.phone = "Phone number must be exactly 10 digits.";
     }
 
     if (!trimmedCountry) {
@@ -280,7 +280,11 @@ export default function RecruitmentPage() {
                   type="tel"
                   placeholder="Phone Number"
                   value={formData.phone}
-                  onChange={(event) => updateField("phone", event.target.value)}
+                  inputMode="numeric"
+                  maxLength={10}
+                  onChange={(event) =>
+                    updateField("phone", event.target.value.replace(/\D/g, "").slice(0, 10))
+                  }
                 />
                 {errors.phone ? (
                   <p className="mt-1.5 text-sm text-red-500">{errors.phone}</p>
